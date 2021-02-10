@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +24,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun calculate() {
+        val distance = findViewById<EditText>(R.id.editDistance).text.toString()
+        val price = findViewById<EditText>(R.id.editPrice).text.toString()
+        val autonomy = findViewById<EditText>(R.id.editAutonomy).text.toString()
 
+        if(distance != ""  && price != ""  && autonomy != "" ){
+            val totalValue = (distance.toFloat() * price.toFloat() / autonomy.toFloat())
+            var total = findViewById<TextView>(R.id.finalPrice)
+            total.text = "R$ ${"%.2f".format(totalValue)}"
+        }
+        Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_LONG).show()
     }
+
 }
